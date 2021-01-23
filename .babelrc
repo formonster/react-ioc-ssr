@@ -1,0 +1,9 @@
+{
+    "presets": [
+        // 支持 React
+        "@babel/preset-react",
+        // 支持 TS
+        "@babel/preset-typescript",
+        "@babel/preset-env"
+    ]
+}
