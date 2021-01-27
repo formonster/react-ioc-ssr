@@ -12,9 +12,16 @@ const errorHandler = async (ctx: Router.RouterContext, next: () => Promise<unkno
             ctx.body = "404";
         }
     } catch (error) {
+
+        ctx.status = error.status || 500;
+
+        if (error.isAxiosError) {
+            console.error(error.response.data);
+            ctx.body = resError(error.response.data.msg);
+            return;
+        }
         // 错误处理
         logger.error(error);
-        ctx.status = error.status || 500;
         ctx.body = resError(error.toString());
     }
 };

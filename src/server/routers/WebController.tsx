@@ -8,7 +8,7 @@ import Router from "@koa/router";
 import routes from '../../shared/router';
 import { getState } from "../../shared/store";
 import App from '../../shared/App';
-import config from '../../../config';
+import config from '../../config';
 
 const readTemplate = (path: string) => fs.readFileSync(path, 'utf8').toString();
 const template = readTemplate(config.template);
