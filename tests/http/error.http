@@ -1,0 +1,6 @@
+POST http://localhost:4400/api/error
+content-type: application/json
+
+{
+    "data": "xxx"
+}
