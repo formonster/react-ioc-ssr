@@ -1,24 +1,56 @@
 {
     "compilerOptions": {
-        "checkJs": true,
         "esModuleInterop": true,
         "experimentalDecorators": true,
         "noImplicitAny": true,
         "noImplicitThis": true,
-        "baseUrl": "src",
+        "baseUrl": "./",
         "paths": {
             "@/*": [
-                "*"
+                "src/*"
+            ],
+            "@/config": [
+                "src/config"
+            ],
+            "@/check": [
+                "src/shared/assets/scripts/check"
+            ],
+            "@/service": [
+                "src/shared/service"
             ],
             "@/store": [
-                "shared/store"
+                "src/shared/store"
             ],
-            "@/serviec": [
-                "shared/serviec"
+            "@/components": [
+                "src/shared/components/index.ts"
+            ],
+            "@/components/*": [
+                "src/shared/components/*"
+            ],
+            "@/modules": [
+                "src/shared/modules/index.ts"
+            ],
+            "@/modules/*": [
+                "src/shared/modules/*"
+            ],
+            "@/implements/*": [
+                "src/server/implements/*"
             ],
             "@/interface/*": [
-                "server/interface/*"
-            ]
+                "src/server/interface/*"
+            ],
+            "@/models/*": [
+                "src/server/models/*"
+            ],
+            "@/utils/response": [
+                "src/server/utils/response"
+            ],
+            "@/utils/common": [
+                "src/server/utils/common"
+            ],
+            "@/utils/logger": [
+                "src/server/utils/logger"
+            ],
         },
         "jsx": "react"
     }
