@@ -1,5 +1,5 @@
 import { IApi } from "@/interface/IApi";
-import { GET, route } from "awilix-koa";
+import { GET, POST, route } from "awilix-koa";
 import Router from "@koa/router";
 
 @route('/api')
@@ -20,6 +20,13 @@ class ApiController {
         ctx.body = {
             count: 1
         };
+    }
+    @route('/beacon')
+    @POST()
+    async error(ctx: Router.RouterContext, next: () => Promise<unknown>): Promise<any> {
+        const params = ctx.request.body;
+        console.log("❌ 收到错误信息", params);
+        ctx.body = params
     }
 }
 

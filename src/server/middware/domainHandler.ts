@@ -8,6 +8,8 @@ const domainHandler = async (ctx: Router.RouterContext, next: () => Promise<unkn
     if (ctx.req.headers.origin !== undefined) {
         ctx.append("Access-Control-Allow-Origin", "*");
         ctx.append("Access-Control-Allow-Credentials", "true");
+        ctx.append("Access-Control-Allow-Headers", "*");
+        ctx.append("Access-Control-Allow-Methods", "*");
     }
     await next();
 };

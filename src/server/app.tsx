@@ -8,6 +8,7 @@ import { createContainer, Lifetime } from "awilix";
 import { scopePerRequest, loadControllers } from "awilix-koa";
 
 // 中间件
+import beaconHandler from "./middware/beaconHandler";
 import errorHandler from "./middware/errorHandler";
 import domainHandler from "./middware/domainHandler";
 
@@ -20,11 +21,17 @@ const app = new Koa();
 app.use(range);
 app.use(bodyParser());
 // 配置中间件-静态资源配置
+app.use(serve(config.staticDir, {
+    // maxAge: 365 * 24 * 60 * 60,
+    // gzip: true,
+    // preload: false,
+    // dynamic: true,
+}));
 app.use(serve(config.buildDir, {
-    maxAge: 365 * 24 * 60 * 60,
-    gzip: true,
-    preload: false,
-    dynamic: true,
+    // maxAge: 365 * 24 * 60 * 60,
+    // gzip: true,
+    // preload: false,
+    // dynamic: true,
 }));
 
 // 创建一个基础容器，负责装载服务
@@ -41,6 +48,7 @@ container.loadModules([`${__dirname}/service/*.ts`], {
 
 // 注入 container
 app.use(scopePerRequest(container));
+app.use(beaconHandler);
 app.use(errorHandler);
 // 跨域请求处理
 app.use(domainHandler);
