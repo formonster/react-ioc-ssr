@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
-import { css } from '@emotion/css'
-import { BaseService } from '../../service';
+import AcUnitIcon from '@material-ui/icons/AcUnit';
+import { BaseService } from '@/service';
+import { Main } from '@/modules';
 import { AxiosResponse } from 'axios';
+import { Button } from '@material-ui/core';
 import { RouteConfig } from 'react-router-config'
-import { setState, useWatchState } from '../../store';
-
-if (global.window) window.addEventListener("message", function (e) {
-    console.log(e.origin);
-    console.log(e.data);
-})
+import { setState, useWatchState } from '@/store';
+import { isWindow } from '@/check';
 
 Home.loadData = (statePath: string) => {
     return new Promise((resolve, reject) => {
@@ -18,6 +16,11 @@ Home.loadData = (statePath: string) => {
         })
     })
 }
+
+// 错误监控
+// if (isWindow()) {
+//     navigator.sendBeacon("http://localhost:4400/api/beacon", '{"data":"xxxx"}');
+// }
 
 function Home({ route }: { route: RouteConfig }) {
 
@@ -33,25 +36,11 @@ function Home({ route }: { route: RouteConfig }) {
         console.log(data);
     }, [data])
 
-    const color = 'white'
-
     return (
-        <div className={css`
-        padding: 32px;
-        background-color: hotpink;
-        font-size: 24px;
-        border-radius: 4px;
-        &:hover {
-          color: ${color};
-        }
-      `}>
-            <video width="300px" className={css`
-            transform: rotate(45deg);`} autoPlay controls src="/media/video/forest.mp4"></video>
-            <h1 className={css`
-        padding: 32px;
-      `}>2Home{data.count}</h1>
-            <button onClick={setData.bind(null, { count: data.count + 1 })}>+1</button>
-        </div>
+        <Main>
+            <Button variant="contained" color="primary"><AcUnitIcon /> 你好 世界 prod</Button>
+            <p>你好</p>
+        </Main>
     );
 }
 

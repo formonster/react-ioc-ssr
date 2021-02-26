@@ -1,11 +1,11 @@
 import watch from '../lib/react-watch-state';
+import { isWindow } from "@/check"
 
-const ENV = global.window ? "WINDOW" : "NODE";
-const IS_WINDOW = ENV === "WINDOW";
-const IS_NODE = !IS_WINDOW;
+const IS_WINDOW = isWindow();
 
 const initStore = {
-    pageState: IS_WINDOW ? ((global as any).INITIAL_STATE || {}) : {},
+    IS_WINDOW,
+    pageState: IS_WINDOW ? (window.INITIAL_STATE || {}) : {},
 }
 const store = watch(initStore, { debug: true });
 

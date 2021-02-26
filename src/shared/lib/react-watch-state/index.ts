@@ -1,6 +1,7 @@
 import Event from './utils/event';
-import { get, set } from "lodash";
-import { ogets, oset, oget } from './utils';
+// import { get, set } from "lodash-es";
+import get from "lodash/get";
+import set from "lodash/set";
 import { useCallback, useState, useEffect } from 'react';
 
 interface Option {
@@ -24,7 +25,7 @@ export default function watch(_initState: object, opt: Option = { debug: false, 
 
     function setState(path: string, value: any) {
 
-        oset(state, path, value);
+        set(state, path, value);
 
         if (opt.debug) {
             console.group("STATE CHANGE");
@@ -43,12 +44,12 @@ export default function watch(_initState: object, opt: Option = { debug: false, 
 
         paths.forEach((val: string) => watchPaths.includes(val) ? '' : watchPaths.push(val))
 
-        const [props, setProps] = useState(paths.map(path => oget(state, path)).map((val, i) => {
+        const [props, setProps] = useState(paths.map(path => get(state, path)).map((val, i) => {
             return [(val && val.unload) ? val.default : val, (value: any) => setState(paths[i], value), paths[i]]
         }));
 
         const handlePropsChange = useCallback(function handlePropsChange({ value, state }) {
-            setProps(paths.map(path => oget(state, path)).map((val, i) => [val, (value: any) => setState(paths[i], value), paths[i]]));
+            setProps(paths.map(path => get(state, path)).map((val, i) => [val, (value: any) => setState(paths[i], value), paths[i]]));
         }, [])
 
         useEffect(() => {

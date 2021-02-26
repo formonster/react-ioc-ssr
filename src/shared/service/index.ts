@@ -1,1 +1,1 @@
-export const BaseService = require('./base/index.ts').default;
+export const BaseService = require('./base').default;
